@@ -41,3 +41,17 @@
         force=yes
   tags: ['timezone']
   become: yes
+
+- name: Fazendo backup da timezone
+  copy:
+     src: /usr/share/zoneinfo/{{timezone}}
+     dest: /usr/share/zoneinfo/{{timezone}}.bkp
+
+- name: Copiando arquivo de timezone atualizado
+  copy:
+     src: "{{timezone}}"
+     dest: /usr/share/zoneinfo/{{timezone}}
+     force: yes
+  tags: ['timezone']
+  become: yes
+
